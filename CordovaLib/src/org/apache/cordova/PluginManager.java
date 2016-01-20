@@ -155,6 +155,8 @@ public class PluginManager {
      * @return              CordovaPlugin or null
      */
     public CordovaPlugin getPlugin(String service) {
+        Log.d(TAG, "getPlugin name -> " + service);
+
         CordovaPlugin ret = pluginMap.get(service);
         if (ret == null) {
             PluginEntry pe = entryMap.get(service);
@@ -166,9 +168,14 @@ public class PluginManager {
             } else {
                 ret = instantiatePlugin(pe.pluginClass);
             }
-            ret.privateInitialize(service, ctx, app, app.getPreferences());
-            pluginMap.put(service, ret);
+
+            if (ret != null) {
+                ret.privateInitialize(service, ctx, app, app.getPreferences());
+                pluginMap.put(service, ret);
+            }
+
         }
+        
         return ret;
     }
 
