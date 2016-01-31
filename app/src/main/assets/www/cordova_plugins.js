@@ -17,7 +17,8 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-echo/echo.js",
         "id": "cordova-plugin-echo.echo",
-        "pluginId": "cordova-plugin-echo"
+        "pluginId": "cordova-plugin-echo",
+        "runs": true
     }
 ];
 module.exports.metadata = 

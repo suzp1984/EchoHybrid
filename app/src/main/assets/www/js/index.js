@@ -20,7 +20,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
-        this.echo = cordova.require("cordova-plugin-echo.echo");
+        // this.echo = cordova.require("cordova-plugin-echo.echo");
     },
     // Bind Event Listeners
     //
@@ -36,6 +36,11 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
+        echo.echo("device ready", function(str) {
+            alert(str);
+        });
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -51,11 +56,11 @@ var app = {
 
     sendEcho: function() {
 
-        this.echo.echo("echo call", function(str) {
+        echo.echo("echo call", function(str) {
             alert(str);
         });
 
-    };
+    },
 };
 
 app.initialize();
