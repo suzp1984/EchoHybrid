@@ -20,6 +20,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        this.echo = cordova.require("cordova-plugin-echo.echo");
     },
     // Bind Event Listeners
     //
@@ -27,6 +28,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.getElementById('echo').addEventListener('onClick', this.sendEcho);
     },
     // deviceready Event Handler
     //
@@ -45,7 +47,15 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    },
+
+    sendEcho: function() {
+
+        this.echo.echo("echo call", function(str) {
+            alert(str);
+        });
+
+    };
 };
 
 app.initialize();
