@@ -21,6 +21,11 @@ var app = {
     initialize: function() {
         this.bindEvents();
         // this.echo = cordova.require("cordova-plugin-echo.echo");
+        window.echo = function(str, callback) {
+            cordova.exec(callback, function(err) {
+                callback("Nothing to echo.");
+            }, "Echo", "echo", [str]);
+        };
     },
     // Bind Event Listeners
     //
@@ -28,7 +33,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.getElementById('echo').addEventListener('onClick', this.sendEcho);
+        document.getElementById('echo').addEventListener('click', this.sendEcho);
     },
     // deviceready Event Handler
     //
@@ -37,7 +42,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
-        echo.echo("device ready", function(str) {
+        window.echo("device ready", function(str) {
             alert(str);
         });
 
@@ -56,7 +61,7 @@ var app = {
 
     sendEcho: function() {
 
-        echo.echo("echo call", function(str) {
+        window.echo("echo call", function(str) {
             alert(str);
         });
 
